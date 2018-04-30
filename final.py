@@ -15,23 +15,36 @@ class MovieInfomation():
 	year = 0
 	rating = 0
 	totalFacebookLikes = 0
+	def printMovieInfo(self):
+		return self.name
 	
 
 with open('movie_metadata.csv', 'rb') as csvfile:
-    moviereader = csv.DictReader(csvfile)
-    movies = MovieInfomation()
-    for row in moviereader:
-		movies.name = row['movie_title']
-		movies.director = row['director_name']
-		movies.directorFacebookLikes = row['director_facebook_likes']
-		movies.duration = row['duration']
-		movies.leadActor = row['actor_1_name']
- 		movies.leadActorFacebookLikes = row['actor_1_facebook_likes']
- 		movies.gross = row['gross']
- 		movies.genres = row['genres']
- 		movies.voterNumber = row['num_voted_users']
- 		movies.contentRating = row['content_rating']
- 		movies.budget = row['budget']
- 		movies.year = row['title_year']
- 		movies.rating = row['imdb_score']
- 		movies.totalFacebookLikes = row['movie_facebook_likes']
+	moviereader = csv.DictReader(csvfile)
+	currentMovie = MovieInfomation()
+	currentMovie.director = "Logan"
+	movies = []
+	#get currentMovie number 
+	for row in moviereader:
+		pass
+	movieLen = moviereader.line_num
+	print movieLen
+	csvfile.seek(0)
+	#fills current then adds current to list 
+	for row in moviereader:
+		currentMovie.name = row['movie_title']
+		currentMovie.director = row['director_name']
+		currentMovie.directorFacebookLikes = row['director_facebook_likes']
+		currentMovie.duration = row['duration']
+		currentMovie.leadActor = row['actor_1_name']
+		currentMovie.leadActorFacebookLikes = row['actor_1_facebook_likes']
+		currentMovie.gross = row['gross']
+		currentMovie.genres = row['genres']
+		currentMovie.voterNumber = row['num_voted_users']
+		currentMovie.contentRating = row['content_rating']
+		currentMovie.budget = row['budget']
+		currentMovie.year = row['title_year']
+		currentMovie.rating = row['imdb_score']
+		currentMovie.totalFacebookLikes = row['movie_facebook_likes']
+		#print currentMovie.name
+		movies.append(currentMovie) 
