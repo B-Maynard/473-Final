@@ -1,4 +1,5 @@
 import csv
+from more_itertools import unique_everseen
 
 # Reads csv file and takes into account the first row as the headers for the columns
 
@@ -19,8 +20,10 @@ class MovieInfomation():
 	totalFacebookLikes = 0
 
 
-with open('movie_metadata.csv', 'rb') as csvfile:
-    moviereader = csv.DictReader(csvfile)
+with open('movie_metadata.csv', 'r') as csvfile, open('2.csv', 'w') as out_file:
+    # TODO: 2.csv has to be opened to be read in order to be manipulated on line 28
+    out_file.writelines(unique_everseen(csvfile))
+    moviereader = csv.DictReader(out_file)
     movies = MovieInfomation()
     for row in moviereader:
     	movies.name = row['movie_title']
