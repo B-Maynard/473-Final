@@ -1,10 +1,12 @@
 import csv
 from ggplot import *
 import pandas as pd
+########################Import data ########################
 
 #create a dataframe of movies and fill data from csv file
 df = pd.read_csv('movie_metadata.csv')
 
+##########################Remove Unneeded data #############
 #Remove unneeded values 
 df = df.drop(
 	columns=['color', 'actor_3_name', 
@@ -20,17 +22,28 @@ print str(beforeDel - len(df)) + " Duplicate records removed"
 #Print values about remaining data 
 rows = len(df)
 cols = len(df.columns)
-print str(len(df)) + " rows"
-print str(len(df.columns)) + " columns"
+print str(len(df)) + " rows \t" + str(len(df.columns)) + " columns\n"
 
-#print missing values 
-print df.isnull().sum()
+##########################Cleaning #########################
 
-#do something with missing values 
+#print extensive view of missing values 
+print df.isnull().sum().to_string() + "\n"
+
+#clean whitespace of movie titles 
+df['movie_title'] = df['movie_title'].str.strip()
+
+#fill missing duration value with the mean
+df['duration'] = df['duration'].fillna(df['duration'].mean().round())
+
+#fill mising countries with a space
+df['country'] = df['country'].fillna('') 
+
 
 
 #Plots
-titleYearData = df['title_year']
-minYear = min(titleYearData)
-maxYear = max(titleYearData)
+print df['title_year'].to_string()
 
+yearHist = ggplot(df, aes(x="title_year")) +\
+geom_histogram(binwidth=.2)
+print yearHist
+yearHist.save('yearHist.png')
