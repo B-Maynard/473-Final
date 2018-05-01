@@ -23,7 +23,10 @@ cols = len(df.columns)
 print str(len(df)) + " rows"
 print str(len(df.columns)) + " columns"
 
-#Remove special character from movie title
+#print missing values 
+print df.isnull().sum()
+
+#do something with missing values 
 
 
 #Plots
@@ -31,7 +34,3 @@ titleYearData = df['title_year']
 minYear = min(titleYearData)
 maxYear = max(titleYearData)
 
-	
-# g = ggplot(df, aes(title_year)) + geom_bar()
-
-# print g
