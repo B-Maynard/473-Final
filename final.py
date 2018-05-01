@@ -1,44 +1,37 @@
 import csv
+from ggplot import *
+import pandas as pd
 
-class MovieInfomation():
-	name = ""
-	director = ""
-	directorFacebookLikes = 0
-	duration = 0
-	leadActor = ""
-	leadActorFacebookLikes = 0
-	gross = 0
-	genres = ""
-	voterNumber = 0
-	contentRating = 0
-	budget = 0
-	year = 0
-	rating = 0
-	totalFacebookLikes = 0
-	def printMovieInfo(self):
-		return self.name
+#create a dataframe of movies and fill data from csv file
+df = pd.read_csv('movie_metadata.csv')
+
+#Remove unneeded values 
+df = df.drop(
+	columns=['color', 'actor_3_name', 
+	'actor_3_facebook_likes', 'facenumber_in_poster', 
+	'plot_keywords', 'movie_imdb_link','aspect_ratio']
+)
+
+#get rows num before duplicate deletion
+beforeDel = len(df)
+df = df.drop_duplicates()
+print str(beforeDel - len(df)) + " Duplicate records removed"
+
+#Print values about remaining data 
+rows = len(df)
+cols = len(df.columns)
+print str(len(df)) + " rows"
+print str(len(df.columns)) + " columns"
+
+#Remove special character from movie title
+
+
+#Plots
+titleYearData = df['title_year']
+minYear = min(titleYearData)
+maxYear = max(titleYearData)
+
 	
-movies = []
-with open('movie_metadata.csv', 'rb') as csvfile:
-	moviereader = csv.DictReader(csvfile)
-	#fills current then adds current to list 
-	for row in moviereader:
-		currentMovie = MovieInfomation()
-		currentMovie.name = row['movie_title']
-		currentMovie.director = row['director_name']
-		currentMovie.directorFacebookLikes = row['director_facebook_likes']
-		currentMovie.duration = row['duration']
-		currentMovie.leadActor = row['actor_1_name']
-		currentMovie.leadActorFacebookLikes = row['actor_1_facebook_likes']
-		currentMovie.gross = row['gross']
-		currentMovie.genres = row['genres']
-		currentMovie.voterNumber = row['num_voted_users']
-		currentMovie.contentRating = row['content_rating']
-		currentMovie.budget = row['budget']
-		currentMovie.year = row['title_year']
-		currentMovie.rating = row['imdb_score']
-		currentMovie.totalFacebookLikes = row['movie_facebook_likes']
-		movies.append(currentMovie) 
+# g = ggplot(df, aes(title_year)) + geom_bar()
 
-for i in range(0,len(movies)):
-	print movies[i].name
+# print g
