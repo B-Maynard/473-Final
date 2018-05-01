@@ -27,7 +27,7 @@ print str(len(df)) + " rows \t" + str(len(df.columns)) + " columns\n"
 ##########################Cleaning #########################
 
 #print extensive view of missing values 
-print df.isnull().sum().to_string() + "\n"
+#print df.isnull().sum().to_string() + "\n"
 
 #clean whitespace of movie titles 
 df['movie_title'] = df['movie_title'].str.strip()
@@ -38,12 +38,12 @@ df['duration'] = df['duration'].fillna(df['duration'].mean().round())
 #fill mising countries with a space
 df['country'] = df['country'].fillna('') 
 
-
+##########################Visualisation#####################
 
 #Plots
-print df['title_year'].to_string()
 
 yearHist = ggplot(df, aes(x="title_year")) +\
-geom_histogram(binwidth=.2)
+geom_histogram(binwidth=.05)
+
 print yearHist
 yearHist.save('yearHist.png')
