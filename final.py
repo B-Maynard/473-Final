@@ -1,42 +1,57 @@
 import csv
-from more_itertools import unique_everseen
+from ggplot import *
+import pandas as pd
+########################Import data ########################
 
-# Reads csv file and takes into account the first row as the headers for the columns
+#create a dataframe of movies and fill data from csv file
+df = pd.read_csv('movie_metadata.csv')
 
-class MovieInfomation():
-	name = ""
-	director = ""
-	directorFacebookLikes = 0
-	duration = 0
-	leadActor = ""
-	leadActorFacebookLikes = 0
-	gross = 0
-	genres = ""
-	voterNumber = 0
-	contentRating = 0
-	budget = 0
-	year = 0
-	rating = 0
-	totalFacebookLikes = 0
+##########################Remove Unneeded data #############
+#Remove unneeded values
+df = df.drop(
+	columns=['color', 'actor_3_name',
+	'actor_3_facebook_likes', 'facenumber_in_poster',
+	'plot_keywords', 'movie_imdb_link','aspect_ratio']
+)
 
+#get rows num before duplicate deletion
+beforeDel = len(df)
+df = df.drop_duplicates()
+print str(beforeDel - len(df)) + " Duplicate records removed"
 
-with open('movie_metadata.csv', 'r') as csvfile, open('2.csv', 'w') as out_file:
-    # TODO: 2.csv has to be opened to be read in order to be manipulated on line 28
-    out_file.writelines(unique_everseen(csvfile))
-    moviereader = csv.DictReader(out_file)
-    movies = MovieInfomation()
-    for row in moviereader:
-    	movies.name = row['movie_title']
-    	movies.director = row['director_name']
-    	movies.directorFacebookLikes = row['director_facebook_likes']
-    	movies.duration = row['duration']
-    	movies.leadActor = row['actor_1_name']
-        movies.leadActorFacebookLikes = row['actor_1_facebook_likes']
-        movies.gross = row['gross']
-        movies.genres = row['genres']
-        movies.voterNumber = row['num_voted_users']
-        movies.contentRating = row['content_rating']
-        movies.budget = row['budget']
-        movies.year = row['title_year']
-        movies.rating = row['imdb_score']
-        movies.totalFacebookLikes = row['movie_facebook_likes']
+#Print values about remaining data
+rows = len(df)
+cols = len(df.columns)
+print str(len(df)) + " rows \t" + str(len(df.columns)) + " columns\n"
+
+##########################Cleaning #########################
+
+#print extensive view of missing values
+#print df.isnull().sum().to_string() + "\n"
+
+#clean whitespace of movie titles
+df['movie_title'] = df['movie_title'].str.strip()
+
+#fill missing duration value with the mean
+df['duration'] = df['duration'].fillna(df['duration'].mean().round())
+
+#fill missing countries with a space
+df['country'] = df['country'].fillna('')
+
+##########################Visualisation#####################
+
+#Plots
+
+# yearHist = ggplot(df, aes(x="title_year")) +\
+# ggtitle("Movie data by year") + xlab("Year") + ylab("Amount") +\
+# geom_histogram(binwidth=.05)
+#
+# print yearHist
+# yearHist.save('yearHist.png')
+
+test = df.groupby('title_year')['imdb_score'].mean()
+
+testpng = ggplot(df, aes(x="title_year", y='imdb_score')) + \
+	geom_point(color='steelblue') + \
+	scale_x_date(breaks=date_breaks('36 months'))
+print testpng
