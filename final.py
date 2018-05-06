@@ -63,11 +63,14 @@ print yearScore
 grossScore = ggplot(df, aes(x="gross", y='imdb_score')) + \
 	geom_point(color='steelblue')
 print grossScore
+grossScore.save('grossScore.png')
+
 
 #duration vs score
 lengthScore = ggplot(df, aes(x="duration", y='imdb_score')) + \
 	geom_point(color='steelblue')
 print lengthScore
+lengthScore.save('lengthScore.png')
 
 #content rating vs score
 df.groupby('content_rating').imdb_score.mean().plot(kind='bar')
