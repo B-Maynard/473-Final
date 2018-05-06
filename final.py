@@ -40,7 +40,7 @@ df['movie_title'] = df['movie_title'].str.strip()
 df['duration'] = df['duration'].fillna(df['duration'].mean().round())
 
 #fill mising countries with a space
-df['country'] = df['country'].fillna('') 
+df['country'] = df['country'].fillna('unknown') 
 
 #remove movies before 1980 
 # df = df.drop(df[df.title_year < 1980].index)
@@ -55,11 +55,11 @@ df['country'] = df['country'].fillna('')
 
 ################Year Histogram to show how the data is spread by year 
 
-yearHist = ggplot(df, aes(x="title_year")) +\
-ggtitle("Movie data by year") + xlab("Year") + ylab("Amount") +\
-geom_histogram(binwidth=.05)
+# yearHist = ggplot(df, aes(x="title_year")) +\
+# ggtitle("Movie data by year") + xlab("Year") + ylab("Amount") +\
+# geom_histogram(binwidth=.05)
 
-print yearHist
+# print yearHist
 # yearHist.save('yearHist.png')
 
 
@@ -153,4 +153,6 @@ print yearHist
 #Manually save the plot
 
 
-
+# ################Country Mean Plot 
+df.groupby('country').imdb_score.mean().nlargest(20).plot(kind='bar')
+plt.show()
