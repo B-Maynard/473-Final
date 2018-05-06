@@ -2,6 +2,9 @@ import csv
 from ggplot import *
 import pandas as pd
 import numpy as np
+import matplotlib 
+import matplotlib.pyplot as plt
+import seaborn as sns
 ########################Import data ########################
 
 #create a dataframe of movies and fill data from csv file
@@ -40,21 +43,27 @@ df['duration'] = df['duration'].fillna(df['duration'].mean().round())
 df['country'] = df['country'].fillna('') 
 
 #remove movies before 1980 
-df = df.drop(df[df.title_year < 2006].index)
-df = df[np.isfinite(df['title_year'])]
-print df.title_year.to_string()
+# df = df.drop(df[df.title_year < 1980].index)
+# df = df[np.isfinite(df['title_year'])]
+# print "After dropping movies before 1980 " +\
+#  str(len(df.title_year.index)) + " records remain"
 
 ##########################Visualization#####################
 
 #Plots
 
-# yearHist = ggplot(df, aes(x="title_year")) +\
-# ggtitle("Movie data by year") + xlab("Year") + ylab("Amount") +\
-# geom_histogram(binwidth=.05)
 
-#print yearHist
+################Year Histogram to show how the data is spread by year 
+
+yearHist = ggplot(df, aes(x="title_year")) +\
+ggtitle("Movie data by year") + xlab("Year") + ylab("Amount") +\
+geom_histogram(binwidth=.05)
+
+print yearHist
 # yearHist.save('yearHist.png')
 
+
+#############Separate each genres into a dataframe 
 
 # actionDf = df[df['genres'].str.contains("Action")]
 # adventureDf = df[df['genres'].str.contains("Adventure")]
@@ -79,7 +88,6 @@ print df.title_year.to_string()
 # thrillerDf = df[df['genres'].str.contains("Thriller")]
 # warDf = df[df['genres'].str.contains("War")]
 # westernDf = df[df['genres'].str.contains("Western")]
-
 
 # genres = [
 # ["Action", actionDf.imdb_score.mean().round(2)],
@@ -108,12 +116,41 @@ print df.title_year.to_string()
 
 # genresDfs = pd.DataFrame.from_records(genres, columns=['genres', 'imdb_score'])
 
-grossScatter = ggplot(df, aes(x='gross', y='imdb_score')) +\
-geom_point() +\
-ylab("IMDB Rating") +\
-xlab("Money Earned") +\
-ggtitle("Rating vs. Gross") +\
-xlim(0,1000000000)
 
-#print grossScatter
-grossScatter.save('grossScatter.png')
+###############Create a scatter plot of highest grossing movies and imdb scores 
+
+
+# grossScatter = ggplot(df, aes(x='gross', y='imdb_score')) +\
+# geom_point() +\
+# ylab("IMDB Rating") +\
+# xlab("Money Earned") +\
+# ggtitle("Rating vs. Gross") +\
+# xlim(0,1000000000)
+
+# #print grossScatter
+# grossScatter.save('grossScatter.png')
+
+
+
+##################Get the top 20 directors by average gross
+
+# df.groupby('director_name').gross.mean().nlargest(20).plot(kind='bar')
+# plt.show()
+
+##################Get the average imdbscore by director(notworking yet)
+
+# df.groupby('content_rating').imdb_score.plot(kind='box')
+# plt.show()
+
+
+#################Correlation plot
+
+# corr = df.corr()
+# corrPlot = sns.heatmap(corr, xticklabels=corr.columns.values, yticklabels=corr.columns.values)
+# sns.heatmap(corr, xticklabels=corr.columns.values, yticklabels=corr.columns.values)
+# plt.show()
+
+#Manually save the plot
+
+
+
