@@ -159,13 +159,14 @@ df['country'] = df['country'].fillna('unknown')
 
 
 # ################Country Mean Plot 
-# df.groupby('country').imdb_score.mean().nlargest(20).plot(kind='bar')
-# plt.show()
+plt.rcParams.update({'font.size': 24})
+df.groupby('country').imdb_score.mean().nlargest(20).plot(kind='bar')
+plt.show()
 
 
 ################## actor likes vs gross 
 
-likeGrossPlot = ggplot(df, aes('movie_facebook_likes', 'imdb_score')) +\
-ggtitle("Movies Likes vs. Rating") + xlab("Total Facebook Likes") + ylab("imdb rating") +\
-geom_point(color='steelblue')
-print likeGrossPlot
+# likeGrossPlot = ggplot(df, aes('movie_facebook_likes', 'imdb_score')) +\
+# ggtitle("Movies Likes vs. Rating") + xlab("Total Facebook Likes") + ylab("imdb rating") +\
+# geom_point(color='steelblue')
+# print likeGrossPlot
