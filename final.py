@@ -161,3 +161,9 @@ print genreScore
 # ################Country Mean Plot 
 # df.groupby('country').imdb_score.mean().nlargest(20).plot(kind='bar')
 # plt.show()
+
+
+################## actor likes vs gross 
+
+# df.
+# plt.show()
