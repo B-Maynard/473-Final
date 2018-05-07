@@ -150,18 +150,19 @@ df['country'] = df['country'].fillna('unknown')
 
 #################Correlation plot
 
-# corr = df.corr()
-# corrPlot = sns.heatmap(corr, xticklabels=corr.columns.values, yticklabels=corr.columns.values)
-# sns.heatmap(corr, xticklabels=corr.columns.values, yticklabels=corr.columns.values)
-# plt.show()
+plt.rcParams.update({'font.size': 24})
+corr = df.corr()
+corrPlot = sns.heatmap(corr, xticklabels=corr.columns.values, yticklabels=corr.columns.values)
+sns.heatmap(corr, xticklabels=corr.columns.values, yticklabels=corr.columns.values)
+plt.show()
 
 #Manually save the plot
 
 
 # ################Country Mean Plot 
-plt.rcParams.update({'font.size': 24})
-df.groupby('country').imdb_score.mean().nlargest(20).plot(kind='bar')
-plt.show()
+
+# df.groupby('country').imdb_score.mean().nlargest(20).plot(kind='bar')
+# plt.show()
 
 
 ################## actor likes vs gross 
