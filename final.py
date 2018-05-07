@@ -31,7 +31,7 @@ print str(len(df)) + " rows \t" + str(len(df.columns)) + " columns\n"
 ##########################Cleaning #########################
 
 #print extensive view of missing values 
-#print df.isnull().sum().to_string() + "\n"
+# print df.isnull().sum().to_string() + "\n"
 
 #clean whitespace of movie titles 
 df['movie_title'] = df['movie_title'].str.strip()
@@ -65,56 +65,61 @@ df['country'] = df['country'].fillna('unknown')
 
 #############Separate each genres into a dataframe 
 
-# actionDf = df[df['genres'].str.contains("Action")]
-# adventureDf = df[df['genres'].str.contains("Adventure")]
-# animationDf = df[df['genres'].str.contains("Animation")]
-# biographyDf = df[df['genres'].str.contains("Biography")]
-# comedyDf = df[df['genres'].str.contains("Comedy")]
-# crimeDf = df[df['genres'].str.contains("Crime")]
-# documentaryDf = df[df['genres'].str.contains("Documentary")]
-# dramaDf = df[df['genres'].str.contains("Drama")]
-# familyDf = df[df['genres'].str.contains("Family")]
-# fantasyDf = df[df['genres'].str.contains("Fantasy")]
-# filmNoirDf = df[df['genres'].str.contains("Film-Noir")]
-# historyDf = df[df['genres'].str.contains("History")]
-# horrorDf = df[df['genres'].str.contains("Horror")]
-# musicalDf = df[df['genres'].str.contains("Musical")]
-# mysteryDf = df[df['genres'].str.contains("Mystery")]
-# newsDf = df[df['genres'].str.contains("News")]
-# romanceDf = df[df['genres'].str.contains("Romance")]
-# sciFiDf = df[df['genres'].str.contains("Sci-Fi")]
-# shortDf = df[df['genres'].str.contains("Short")]
-# sportDf = df[df['genres'].str.contains("Sport")]
-# thrillerDf = df[df['genres'].str.contains("Thriller")]
-# warDf = df[df['genres'].str.contains("War")]
-# westernDf = df[df['genres'].str.contains("Western")]
+actionDf = df[df['genres'].str.contains("Action")]
+adventureDf = df[df['genres'].str.contains("Adventure")]
+animationDf = df[df['genres'].str.contains("Animation")]
+biographyDf = df[df['genres'].str.contains("Biography")]
+comedyDf = df[df['genres'].str.contains("Comedy")]
+crimeDf = df[df['genres'].str.contains("Crime")]
+documentaryDf = df[df['genres'].str.contains("Documentary")]
+dramaDf = df[df['genres'].str.contains("Drama")]
+familyDf = df[df['genres'].str.contains("Family")]
+fantasyDf = df[df['genres'].str.contains("Fantasy")]
+filmNoirDf = df[df['genres'].str.contains("Film-Noir")]
+historyDf = df[df['genres'].str.contains("History")]
+horrorDf = df[df['genres'].str.contains("Horror")]
+musicalDf = df[df['genres'].str.contains("Musical")]
+mysteryDf = df[df['genres'].str.contains("Mystery")]
+newsDf = df[df['genres'].str.contains("News")]
+romanceDf = df[df['genres'].str.contains("Romance")]
+sciFiDf = df[df['genres'].str.contains("Sci-Fi")]
+shortDf = df[df['genres'].str.contains("Short")]
+sportDf = df[df['genres'].str.contains("Sport")]
+thrillerDf = df[df['genres'].str.contains("Thriller")]
+warDf = df[df['genres'].str.contains("War")]
+westernDf = df[df['genres'].str.contains("Western")]
 
-# genres = [
-# ["Action", actionDf.imdb_score.mean().round(2)],
-# ["Adventure", adventureDf.imdb_score.mean().round(2)],
-# ["Animation", animationDf.imdb_score.mean().round(2)],
-# ["Biography", biographyDf.imdb_score.mean().round(2)],
-# ["Comedy", comedyDf.imdb_score.mean().round(2)],
-# ["Crime", crimeDf.imdb_score.mean().round(2)],
-# ["Documentary", documentaryDf.imdb_score.mean().round(2)],
-# ["Drama", dramaDf.imdb_score.mean().round(2)],
-# ["Family", familyDf.imdb_score.mean().round(2)],
-# ["Fantasy", fantasyDf.imdb_score.mean().round(2)], 
-# ["Film-Noir", filmNoirDf.imdb_score.mean().round(2)],
-# ["History", historyDf.imdb_score.mean().round(2)],
-# ["Horror", horrorDf.imdb_score.mean().round(2)],
-# ["Musical", musicalDf.imdb_score.mean().round(2)],
-# ["Mystery", mysteryDf.imdb_score.mean().round(2)],
-# ["News", newsDf.imdb_score.mean().round(2)],
-# ["Romance", romanceDf.imdb_score.mean().round(2)],
-# ["Sci-Fi", sciFiDf.imdb_score.mean().round(2)],
-# ["Short", shortDf.imdb_score.mean().round(2)],
-# ["Sport", sportDf.imdb_score.mean().round(2)],
-# ["Thriller", thrillerDf.imdb_score.mean().round(2)],
-# ["War", warDf.imdb_score.mean().round(2)],
-# ["Western", westernDf.imdb_score.mean().round(2)]]
+genres = [
+["Action", actionDf.imdb_score.mean().round(2)],
+["Adventure", adventureDf.imdb_score.mean().round(2)],
+["Animation", animationDf.imdb_score.mean().round(2)],
+["Biography", biographyDf.imdb_score.mean().round(2)],
+["Comedy", comedyDf.imdb_score.mean().round(2)],
+["Crime", crimeDf.imdb_score.mean().round(2)],
+["Documentary", documentaryDf.imdb_score.mean().round(2)],
+["Drama", dramaDf.imdb_score.mean().round(2)],
+["Family", familyDf.imdb_score.mean().round(2)],
+["Fantasy", fantasyDf.imdb_score.mean().round(2)], 
+["Film-Noir", filmNoirDf.imdb_score.mean().round(2)],
+["History", historyDf.imdb_score.mean().round(2)],
+["Horror", horrorDf.imdb_score.mean().round(2)],
+["Musical", musicalDf.imdb_score.mean().round(2)],
+["Mystery", mysteryDf.imdb_score.mean().round(2)],
+["News", newsDf.imdb_score.mean().round(2)],
+["Romance", romanceDf.imdb_score.mean().round(2)],
+["Sci-Fi", sciFiDf.imdb_score.mean().round(2)],
+["Short", shortDf.imdb_score.mean().round(2)],
+["Sport", sportDf.imdb_score.mean().round(2)],
+["Thriller", thrillerDf.imdb_score.mean().round(2)],
+["War", warDf.imdb_score.mean().round(2)],
+["Western", westernDf.imdb_score.mean().round(2)]]
 
-# genresDfs = pd.DataFrame.from_records(genres, columns=['genres', 'imdb_score'])
+genresDfs = pd.DataFrame.from_records(genres, columns=['genres', 'imdb_score'])
+genresDfs = genresDfs.sort_values('imdb_score')
+genreScore = ggplot(genresDfs, aes(x="genres", weight="imdb_score")) +\
+ggtitle("Genre Average Rating") + xlab("Genres") + ylab("Rating") +\
+geom_bar()
+print genreScore
 
 
 ###############Create a scatter plot of highest grossing movies and imdb scores 
@@ -139,7 +144,7 @@ df['country'] = df['country'].fillna('unknown')
 
 ##################Get the average imdbscore by director(notworking yet)
 
-# df.groupby('content_rating').imdb_score.plot(kind='box')
+# print df.groupby('content_rating').imdb_score.mean()
 # plt.show()
 
 
@@ -154,5 +159,5 @@ df['country'] = df['country'].fillna('unknown')
 
 
 # ################Country Mean Plot 
-df.groupby('country').imdb_score.mean().nlargest(20).plot(kind='bar')
-plt.show()
+# df.groupby('country').imdb_score.mean().nlargest(20).plot(kind='bar')
+# plt.show()
