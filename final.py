@@ -42,11 +42,18 @@ df['duration'] = df['duration'].fillna(df['duration'].mean().round())
 #fill mising countries with a space
 df['country'] = df['country'].fillna('unknown') 
 
+
+df = df[np.isfinite(df['gross'])]
+df = df[np.isfinite(df['budget'])]
+df= df.assign(profit = df.gross - df.budget)
+
+
+
 #remove movies before 1980 
-# df = df.drop(df[df.title_year < 1980].index)
-# df = df[np.isfinite(df['title_year'])]
-# print "After dropping movies before 1980 " +\
-#  str(len(df.title_year.index)) + " records remain"
+df = df.drop(df[df.title_year < 1980].index)
+df = df[np.isfinite(df['title_year'])]
+print "After dropping movies before 1980 " +\
+ str(len(df.title_year.index)) + " records remain"
 
 ##########################Visualization#####################
 
