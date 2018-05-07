@@ -55,12 +55,16 @@ df['country'] = df['country'].fillna('unknown')
 
 ################Year Histogram to show how the data is spread by year 
 
-# yearHist = ggplot(df, aes(x="title_year")) +\
-# ggtitle("Movie data by year") + xlab("Year") + ylab("Amount") +\
-# geom_histogram(binwidth=.05)
 
-# print yearHist
-# yearHist.save('yearHist.png')
+yearHist = ggplot(df, aes(x="title_year")) +\
+ggtitle("Movie data by year") + xlab("Year") + ylab("Amount") +\
+geom_histogram(binwidth=.05)
+
+t = theme_gray()
+t._rcParams['font.size'] = 30
+
+print yearHist + t
+
 
 
 #############Separate each genres into a dataframe 
@@ -119,20 +123,27 @@ df['country'] = df['country'].fillna('unknown')
 # genreScore = ggplot(genresDfs, aes(x="genres", weight="imdb_score")) +\
 # ggtitle("Genre Average Rating") + xlab("Genres") + ylab("Rating") +\
 # geom_bar()
-# print genreScore
+
+# #increse font 
+# t = theme_gray()
+# t._rcParams['font.size'] = 16
+# print genreScore + t
 
 
 ###############Create a scatter plot of highest grossing movies and imdb scores 
 
-
+# plt.rcParams.update({'font.size': 24})
 # grossScatter = ggplot(df, aes(x='gross', y='imdb_score')) +\
 # geom_point() +\
 # ylab("IMDB Rating") +\
 # xlab("Money Earned") +\
 # ggtitle("Rating vs. Gross") +\
 # xlim(0,1000000000)
-
-# #print grossScatter
+# #increse font 
+# t = theme_gray()
+# t._rcParams['font.size'] = 30
+# print grossScatter + t
+# plt.show()
 # grossScatter.save('grossScatter.png')
 
 
@@ -150,11 +161,11 @@ df['country'] = df['country'].fillna('unknown')
 
 #################Correlation plot
 
-plt.rcParams.update({'font.size': 24})
-corr = df.corr()
-corrPlot = sns.heatmap(corr, xticklabels=corr.columns.values, yticklabels=corr.columns.values)
-sns.heatmap(corr, xticklabels=corr.columns.values, yticklabels=corr.columns.values)
-plt.show()
+# 
+# corr = df.corr()
+# corrPlot = sns.heatmap(corr, xticklabels=corr.columns.values, yticklabels=corr.columns.values)
+# sns.heatmap(corr, xticklabels=corr.columns.values, yticklabels=corr.columns.values)
+# plt.show()
 
 #Manually save the plot
 
